@@ -37,11 +37,10 @@ function TransactionItem({ transaction, categories, addCategory }) {
 
   const handleSaveNewCategory = () => {
     if (newCategoryName.trim() !== '' && newCategoryName.length <= 15) {
-      addCategory(newCategoryName.trim()); // Call the passed function to add the new category
-      setNewCategoryName(''); // Reset the input
-      setShowCategoryModal(false); // Close the modal
+      addCategory(newCategoryName.trim()); 
+      setNewCategoryName(''); 
+      setShowCategoryModal(false); // close the modal
     } else {
-      // You can set an error message if the input is invalid
       setCategoryError('Please enter a valid category name.');
     }
   }

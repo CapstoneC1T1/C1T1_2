@@ -16,7 +16,7 @@ const transactions = [
 ];
 
 function TransactionList() {
-  const [categories, setCategories] = useState(['Entertainment', 'Food']); // Move category state here
+  const [categories, setCategories] = useState([]); // Move category state here
 
   const addCategory = (newCategory) => {
     if (!categories.includes(newCategory)) {
@@ -29,7 +29,6 @@ function TransactionList() {
   return (
     <div className="transaction-list">
       {transactions.map((transaction) => (
-        // Pass addCategory to TransactionItem
         <TransactionItem key={transaction.id} transaction={transaction} categories={categories} addCategory={addCategory} />
       ))}
     </div>
