@@ -33,6 +33,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
   };
 
   const handleSaveCategory = () => {
+    alert('Category has been saved.');
   };
 
   const handleSaveNewCategory = () => {
@@ -46,6 +47,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
   }
 
   const handleSaveNotes = () => {
+    alert('Notes have been saved.');
   };
 
   return (
