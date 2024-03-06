@@ -1,38 +1,37 @@
 .transaction-item {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  margin-bottom: 1rem;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: box-shadow 0.3s ease;
+  border: 1px solid #ccc;
+  margin-bottom: 8px;
+  padding: 10px;
+  cursor: pointer; /* make the entire item clickable */
+  overflow: hidden; /* keep the expanding content from spilling out */
+  transition: max-height 0.2s ease-out; /* smooth transition for expanding */
 }
 
-.transaction-item:hover {
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+.transaction-summary {
+  display: flex;
+  justify-content: space-between;
+}
+
+.expanded {
+  max-height: 500px; 
 }
 
 .transaction-details {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start; 
+  padding-top: 10px;
 }
 
-.transaction-name {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #333;
-  margin-bottom: 0.25rem;
+.category-section,
+.notes-section {
+  flex-basis: 50%; 
 }
 
-.transaction-date {
-  color: #666;
-  font-size: 0.9rem;
+.category-section {
+  padding-right: 10px;
 }
 
-.transaction-amount {
-  font-weight: 700;
-  color: #333;
-  font-size: 1.2rem;
+.notes-section {
+  padding-left: 10px;
 }

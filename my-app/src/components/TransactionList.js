@@ -8,8 +8,8 @@ const transactions = [
   { id: 2, name: 'Netflix', date: '01/29', time: '8:03pm', amount: 1 },
   { id: 3, name: 'Netflix', date: '01/29', time: '8:03pm', amount: 1 },
   { id: 4, name: 'Netflix', date: '01/29', time: '8:03pm', amount: 1 },
-  { id: 4, name: 'Netflix', date: '01/29', time: '8:03pm', amount: 1 },
-  { id: 4, name: 'Netflix', date: '01/29', time: '8:03pm', amount: 1 }
+  { id: 5, name: 'Netflix', date: '01/29', time: '8:03pm', amount: 1 },
+  { id: 6, name: 'Netflix', date: '01/29', time: '8:03pm', amount: 1 }
 ];
 
 function TransactionList() {
