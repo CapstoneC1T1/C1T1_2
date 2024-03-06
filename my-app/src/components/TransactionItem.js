@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/TransactionItem.css'; 
 
-function TransactionItem({ transaction }) {
+function TransactionItem({ transaction, categories, addCategory }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(transaction.category || 'Select Category');
   const [notes, setNotes] = useState(transaction.notes || '');
@@ -19,16 +19,13 @@ function TransactionItem({ transaction }) {
   };
 
   const handleAddNewCategoryClick = () => {
+    setCategoryError('');
     setShowCategoryModal(true);
   }
 
   const handleCategoryNameChange = (event) => {
     const input = event.target.value;
-    if (input.length <= 15) {
-      setNewCategoryName(input);
-    } else {
-
-    }
+    setNewCategoryName(input);
   }
 
   const handleNotesChange = (event) => {
@@ -39,7 +36,14 @@ function TransactionItem({ transaction }) {
   };
 
   const handleSaveNewCategory = () => {
-    setShowCategoryModal(false);
+    if (newCategoryName.trim() !== '' && newCategoryName.length <= 15) {
+      addCategory(newCategoryName.trim()); // Call the passed function to add the new category
+      setNewCategoryName(''); // Reset the input
+      setShowCategoryModal(false); // Close the modal
+    } else {
+      // You can set an error message if the input is invalid
+      setCategoryError('Please enter a valid category name.');
+    }
   }
 
   const handleSaveNotes = () => {
@@ -60,9 +64,9 @@ function TransactionItem({ transaction }) {
             <label htmlFor="category">Category: </label>
             <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
               <option value="Select Category" disabled>Select Category</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Food">Study</option>
-              {/* Add more categories here */}
+              {categories.map((category, index) => (
+                <option key={index} value={category}>{category}</option>
+              ))}
             </select>
             {showCategoryModal && (
               <div className="modal">
@@ -74,11 +78,8 @@ function TransactionItem({ transaction }) {
                     type="text"
                     value={newCategoryName}
                     onChange={handleCategoryNameChange}
-                    maxLength={15} // This also ensures the input doesn't exceed 15 characters
                   />
                   <button onClick={handleSaveNewCategory}>Save New Category</button>
-                  {/* Display error message if there is one */}
-                  {categoryError && <p className="error-message">{categoryError}</p>}
                 </div>
               </div>
             )}
