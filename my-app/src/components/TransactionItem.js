@@ -42,7 +42,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
       setNewCategoryName(''); 
       setShowCategoryModal(false); // close the modal
     } else {
-      setCategoryError('Please enter a valid category name.');
+      setCategoryError('Please enter a valid category name (category name cannot be empty or too long).');
     }
   }
 
@@ -81,6 +81,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
                     onChange={handleCategoryNameChange}
                   />
                   <button onClick={handleSaveNewCategory}>Save New Category</button>
+                  {categoryError && <p className="error-message">{categoryError}</p>}
                 </div>
               </div>
             )}
