@@ -7,7 +7,7 @@ function TransactionItem({ transaction }) {
   const [notes, setNotes] = useState(transaction.notes || '');
 
   const handleSummaryClick = (event) => {
-    event.stopPropagation(); // prevent click from bubbling to expanded details
+    event.stopPropagation(); // revent click from bubbling to expanded details
     setIsExpanded(!isExpanded);
   };
 
@@ -19,9 +19,12 @@ function TransactionItem({ transaction }) {
     setNotes(event.target.value);
   };
 
-  const handleSave = () => {
-    // Logic to save the new category and notes
-    // This will likely involve updating the state in the parent component or a global state
+  const handleSaveCategory = () => {
+    // Logic to save the category
+  };
+
+  const handleSaveNotes = () => {
+    // Logic to save the notes
   };
 
   return (
@@ -40,16 +43,17 @@ function TransactionItem({ transaction }) {
             <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
               <option value="Select Category" disabled>Select Category</option>
               <option value="Entertainment">Entertainment</option>
-              <option value="Food">Food</option>
+              <option value="Food">Study</option>
               {/* Add more categories here */}
             </select>
             <button onClick={() => {/* Logic to add a new category */}}>+ Add New</button>
+            <button onClick={handleSaveCategory}>Save Category</button> 
           </div>
           <div className="transaction-notes">
             <label htmlFor="notes">Notes: </label>
-            <textarea id="notes" value={notes} onChange={handleNotesChange} />
+            <textarea id="notes" value={notes} onChange={handleNotesChange}></textarea>
+            <button onClick={handleSaveNotes}>Save Notes</button>
           </div>
-          <button className="save-btn" onClick={handleSave}>Save</button>
         </div>
       )}
     </div>
