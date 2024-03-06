@@ -5,6 +5,9 @@ function TransactionItem({ transaction }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(transaction.category || 'Select Category');
   const [notes, setNotes] = useState(transaction.notes || '');
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState('');
+  const [categoryError, setCategoryError] = useState('');
 
   const handleSummaryClick = (event) => {
     event.stopPropagation(); // revent click from bubbling to expanded details
@@ -15,16 +18,31 @@ function TransactionItem({ transaction }) {
     setSelectedCategory(event.target.value);
   };
 
+  const handleAddNewCategoryClick = () => {
+    setShowCategoryModal(true);
+  }
+
+  const handleCategoryNameChange = (event) => {
+    const input = event.target.value;
+    if (input.length <= 15) {
+      setNewCategoryName(input);
+    } else {
+
+    }
+  }
+
   const handleNotesChange = (event) => {
     setNotes(event.target.value);
   };
 
   const handleSaveCategory = () => {
-    // Logic to save the category
   };
 
+  const handleSaveNewCategory = () => {
+    setShowCategoryModal(false);
+  }
+
   const handleSaveNotes = () => {
-    // Logic to save the notes
   };
 
   return (
@@ -46,7 +64,25 @@ function TransactionItem({ transaction }) {
               <option value="Food">Study</option>
               {/* Add more categories here */}
             </select>
-            <button onClick={() => {/* Logic to add a new category */}}>+ Add New</button>
+            {showCategoryModal && (
+              <div className="modal">
+                <div className="modal-content">
+                  <span className="close" onClick={() => setShowCategoryModal(false)}>&times;</span>
+                  <label htmlFor="new-category-name">New Category Name:</label>
+                  <input
+                    id="new-category-name"
+                    type="text"
+                    value={newCategoryName}
+                    onChange={handleCategoryNameChange}
+                    maxLength={15} // This also ensures the input doesn't exceed 15 characters
+                  />
+                  <button onClick={handleSaveNewCategory}>Save New Category</button>
+                  {/* Display error message if there is one */}
+                  {categoryError && <p className="error-message">{categoryError}</p>}
+                </div>
+              </div>
+            )}
+            <button onClick={handleAddNewCategoryClick}>+ Add New</button>
             <button onClick={handleSaveCategory}>Save Category</button> 
           </div>
           <div className="transaction-notes">
