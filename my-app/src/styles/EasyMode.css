@@ -88,7 +88,10 @@
 }
 
 .deposit-money {
-    padding-top: 2rem;
+    margin-top: 2rem;
+    border: solid;
+    border-width: 1.5px;
+    border-color: rgb(0, 0, 0);
 }
 
 .deposit-button {
