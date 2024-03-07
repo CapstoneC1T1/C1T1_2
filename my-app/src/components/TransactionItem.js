@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import '../styles/TransactionItem.css'; 
+import React, { useState } from "react";
+import "../styles/TransactionItem.css";
 
 function TransactionItem({ transaction, categories, addCategory }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(transaction.category || 'Select Category');
-  const [notes, setNotes] = useState(transaction.notes || '');
+  const [selectedCategory, setSelectedCategory] = useState(
+    transaction.category || "Select Category",
+  );
+  const [notes, setNotes] = useState(transaction.notes || "");
   const [showCategoryModal, setShowCategoryModal] = useState(false);
-  const [newCategoryName, setNewCategoryName] = useState('');
-  const [categoryError, setCategoryError] = useState('');
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [categoryError, setCategoryError] = useState("");
 
   const handleSummaryClick = (event) => {
     event.stopPropagation(); // revent click from bubbling to expanded details
@@ -19,60 +21,78 @@ function TransactionItem({ transaction, categories, addCategory }) {
   };
 
   const handleAddNewCategoryClick = () => {
-    setCategoryError('');
+    setCategoryError("");
     setShowCategoryModal(true);
-  }
+  };
 
   const handleCategoryNameChange = (event) => {
     const input = event.target.value;
     setNewCategoryName(input);
-  }
+  };
 
   const handleNotesChange = (event) => {
     setNotes(event.target.value);
   };
 
   const handleSaveCategory = () => {
-    alert('Category has been saved.');
+    alert("Category has been saved.");
   };
 
   const handleSaveNewCategory = () => {
-    if (newCategoryName.trim() !== '' && newCategoryName.length <= 15) {
-      addCategory(newCategoryName.trim()); 
-      setNewCategoryName(''); 
+    if (newCategoryName.trim() !== "" && newCategoryName.length <= 15) {
+      addCategory(newCategoryName.trim());
+      setNewCategoryName("");
       setShowCategoryModal(false); // close the modal
     } else {
-      setCategoryError('Please enter a valid category name (category name cannot be empty or too long).');
+      setCategoryError(
+        "Please enter a valid category name (category name cannot be empty or too long).",
+      );
     }
-  }
+  };
 
   const handleSaveNotes = () => {
-    alert('Notes have been saved.');
+    alert("Notes have been saved.");
   };
 
   return (
-    <div className={`transaction-item ${isExpanded ? 'expanded' : ''}`}>
+    <div className={`transaction-item ${isExpanded ? "expanded" : ""}`}>
       <div className="transaction-summary" onClick={handleSummaryClick}>
         <p className="transaction-name">{transaction.name}</p>
-        <p className="transaction-date">{transaction.date} {transaction.time}</p>
-        <div className="transaction-amount">
-          ${transaction.amount}
-        </div>
+        <p className="transaction-date">
+          {transaction.date} {transaction.time}
+        </p>
+        <div className="transaction-amount">${transaction.amount}</div>
       </div>
       {isExpanded && (
-        <div className="transaction-details" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="transaction-details"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="transaction-category">
             <label htmlFor="category">Category: </label>
-            <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-              <option value="Select Category" disabled>Select Category</option>
+            <select
+              id="category"
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+            >
+              <option value="Select Category" disabled>
+                Select Category
+              </option>
               {categories.map((category, index) => (
-                <option key={index} value={category}>{category}</option>
+                <option key={index} value={category}>
+                  {category}
+                </option>
               ))}
             </select>
             {showCategoryModal && (
               <div className="modal">
                 <div className="modal-content">
-                  <span className="close" onClick={() => setShowCategoryModal(false)}>&times;</span>
+                  <span
+                    className="close"
+                    onClick={() => setShowCategoryModal(false)}
+                  >
+                    &times;
+                  </span>
                   <label htmlFor="new-category-name">New Category Name:</label>
                   <input
                     id="new-category-name"
@@ -80,17 +100,25 @@ function TransactionItem({ transaction, categories, addCategory }) {
                     value={newCategoryName}
                     onChange={handleCategoryNameChange}
                   />
-                  <button onClick={handleSaveNewCategory}>Save New Category</button>
-                  {categoryError && <p className="error-message">{categoryError}</p>}
+                  <button onClick={handleSaveNewCategory}>
+                    Save New Category
+                  </button>
+                  {categoryError && (
+                    <p className="error-message">{categoryError}</p>
+                  )}
                 </div>
               </div>
             )}
             <button onClick={handleAddNewCategoryClick}>+ Add New</button>
-            <button onClick={handleSaveCategory}>Save Category</button> 
+            <button onClick={handleSaveCategory}>Save Category</button>
           </div>
           <div className="transaction-notes">
             <label htmlFor="notes">Notes: </label>
-            <textarea id="notes" value={notes} onChange={handleNotesChange}></textarea>
+            <textarea
+              id="notes"
+              value={notes}
+              onChange={handleNotesChange}
+            ></textarea>
             <button onClick={handleSaveNotes}>Save Notes</button>
           </div>
         </div>
