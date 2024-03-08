@@ -137,6 +137,9 @@
   width: 80%; 
 }
 
+.modal-content button {
+  margin-left: 10px; 
+}
 .close {
   color: #aaa;
   float: right;
