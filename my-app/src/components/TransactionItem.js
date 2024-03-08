@@ -69,7 +69,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="transaction-category">
-            <label htmlFor="category">Category: </label>
+            <label htmlFor="category">Category:</label>
             <select
               id="category"
               value={selectedCategory}
