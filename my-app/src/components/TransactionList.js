@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/TransactionList.css";
 import TransactionItem from "./TransactionItem";
 
@@ -16,7 +16,14 @@ const transactions = [
 ];
 
 function TransactionList() {
-  const [categories, setCategories] = useState([]); // Move category state here
+  const [categories, setCategories] = useState(() => {
+    const savedCategories = sessionStorage.getItem('categories');
+    return savedCategories ? JSON.parse(savedCategories) : [];
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem('categories', JSON.stringify(categories));
+  }, [categories]);
 
   const addCategory = (newCategory) => {
     if (!categories.includes(newCategory)) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/TransactionItem.css";
 
 function TransactionItem({ transaction, categories, addCategory }) {
@@ -10,6 +10,13 @@ function TransactionItem({ transaction, categories, addCategory }) {
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState("");
   const [categoryError, setCategoryError] = useState("");
+
+  useEffect(() => {
+    const savedNotes = sessionStorage.getItem(`notes-${transaction.id}`);
+    if (savedNotes) {
+      setNotes(savedNotes);
+    }
+  }, [transaction.id]);
 
   const handleSummaryClick = (event) => {
     event.stopPropagation(); // revent click from bubbling to expanded details
@@ -35,6 +42,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
   };
 
   const handleSaveCategory = () => {
+    sessionStorage.setItem(`category-${transaction.id}`, selectedCategory);
     alert("Category has been saved.");
   };
 
@@ -51,6 +59,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
   };
 
   const handleSaveNotes = () => {
+    sessionStorage.setItem(`notes-${transaction.id}`, notes);
     alert("Notes have been saved.");
   };
 
