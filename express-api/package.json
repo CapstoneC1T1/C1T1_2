@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "express": "^4.18.3"
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "mongodb": "^6.4.0"
   },
   "name": "express-api",
   "version": "1.0.0",
@@ -10,8 +12,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server",
-    "dev": "nodemon server"
+    "start": "node app",
+    "dev": "nodemon app"
   },
   "keywords": [],
   "author": "",
