@@ -17,12 +17,12 @@ const transactions = [
 
 function TransactionList() {
   const [categories, setCategories] = useState(() => {
-    const savedCategories = sessionStorage.getItem('categories');
+    const savedCategories = sessionStorage.getItem("categories");
     return savedCategories ? JSON.parse(savedCategories) : [];
   });
 
   useEffect(() => {
-    sessionStorage.setItem('categories', JSON.stringify(categories));
+    sessionStorage.setItem("categories", JSON.stringify(categories));
   }, [categories]);
 
   const addCategory = (newCategory) => {

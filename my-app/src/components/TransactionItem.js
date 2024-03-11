@@ -35,6 +35,21 @@ function TransactionItem({ transaction, categories, addCategory }) {
   const handleCategoryNameChange = (event) => {
     const input = event.target.value;
     setNewCategoryName(input);
+    fetch("/api/v1/transactions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newCategoryName),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("failed to store data in backend");
+        }
+      })
+      .catch((error) => {
+        console.error("Error storing data in backend:", error);
+      });
   };
 
   const handleNotesChange = (event) => {
