@@ -1,31 +1,30 @@
 .transaction-item {
   border: 1px solid #ccc;
   background: #fff;
-  border-radius: 8px; 
+  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 16px;
   padding: 15px;
-  cursor: pointer; 
-  overflow: hidden; 
-  transition: box-shadow 0.2s ease-out; 
-  font-family: 'Calibri', sans-serif;
-  cursor: pointer; 
+  cursor: pointer;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease-out;
+  font-family: "Calibri", sans-serif;
+  cursor: pointer;
   overflow: hidden;
 }
 
-
-.transaction-name, 
+.transaction-name,
 .transaction-amount {
   margin: 0;
-  font-size: 1.5rem; 
-  margin-bottom: 0.5rem; 
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
   margin-top: 0.5rem;
 }
 
 .transaction-date {
   margin: 0;
-  font-size: 1.2rem; 
-  margin-bottom: 0.5rem; 
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
   margin-top: 0.5rem;
 }
 
@@ -36,11 +35,11 @@
 .transaction-summary {
   display: flex;
   justify-content: space-between;
-  align-items: center; 
-  margin-bottom: 12px; 
-  padding: 10px; 
-  margin-bottom: 8px; 
-  background: #fff; 
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 10px;
+  margin-bottom: 8px;
+  background: #fff;
 }
 
 .expanded {
@@ -52,23 +51,23 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 10px;
-  border-top: 1px solid #eee; 
-  padding-top: 1rem; 
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
 }
 
 .transaction-notes {
-  font-size: 1.2rem; 
+  font-size: 1.2rem;
   flex: 1;
   flex-grow: 2;
   margin-right: 10px;
 }
 
 .transaction-category {
-  font-size: 1.2rem; 
+  font-size: 1.2rem;
   flex-grow: 1;
   display: flex;
   align-items: center;
-  margin-bottom: 1rem; 
+  margin-bottom: 1rem;
   margin-left: 0.5rem;
 }
 
@@ -77,16 +76,15 @@
   margin-right: 5px;
 }
 
-
 .transaction-category label,
 .transaction-notes label {
-  color: #333; 
+  color: #333;
   display: block;
-  margin-bottom: 0.5rem; 
+  margin-bottom: 0.5rem;
 }
 
 .transaction-item button {
-  background-color: #004a99; 
+  background-color: #004a99;
   color: white;
   border: none;
   border-radius: 4px;
@@ -107,9 +105,9 @@
   border-radius: 4px;
   padding: 10px;
   font-size: 14px;
-  height: 80px; 
+  height: 80px;
   width: 90%;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 .save-btn {
@@ -117,28 +115,28 @@
 }
 
 .modal {
-  display: block; 
+  display: block;
   position: fixed;
-  z-index: 1; 
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; 
+  width: 100%;
   height: 100%;
-  overflow: auto; 
-  background-color: rgb(0, 0, 0); 
-  background-color: rgba(0, 0, 0, 0.4); 
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; 
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; 
+  width: 80%;
 }
 
 .modal-content button {
-  margin-left: 10px; 
+  margin-left: 10px;
 }
 .close {
   color: #aaa;

@@ -40,7 +40,9 @@ function TransactionItem({ transaction, categories, addCategory }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newCategoryName),
+      body: JSON.stringify({
+        category: newCategoryName,
+      }),
     })
       .then((response) => {
         if (!response.ok) {

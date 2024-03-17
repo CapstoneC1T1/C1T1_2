@@ -8,7 +8,7 @@ const mongo_username = process.env.C1_Mongodb_username;
 const mongo_password = process.env.C1_Mongodb_password_2;
 const uri = `mongodb+srv://${mongo_username}:${mongo_password}@cluster0.6ibfiyk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
-const port = 8000;
+const port = 5000;
 
 MongoClient.connect(uri, {
   maxPoolSize: 50,
