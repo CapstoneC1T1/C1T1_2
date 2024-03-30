@@ -13,6 +13,7 @@ const transaction_schema = new mongoose.Schema({
     type: String,
     required: false,
     unique: false,
+	default: "Default",
   },
   buy_from: {
     type: String,
@@ -23,15 +24,16 @@ const transaction_schema = new mongoose.Schema({
     type: Date,
     //required: true,
     unique: false,
+	default: Date.now,
   },
   amount: {
     type: Number,
     //required: true,
     unique: false,
   },
-  createdAt: {
-    type: Date,
-  },
+  //createdAt: {
+    //type: Date,
+  //},
   user_id: {
     type: Number,
     unique: true,

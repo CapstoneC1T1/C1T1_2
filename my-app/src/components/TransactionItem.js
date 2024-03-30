@@ -37,13 +37,14 @@ function TransactionItem({ transaction, categories, addCategory }) {
     setNewCategoryName(input);
     fetch("/api/v1/transactions", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        category: newCategoryName,
+      //headers: {
+        //"Content-Type": "application/json",
+      //},
+      body: {
+        category: input,
+		buy_from: "Amazon",
 		user_id: 1,
-      }),
+      },
     })
       .then((response) => {
         if (!response.ok) {

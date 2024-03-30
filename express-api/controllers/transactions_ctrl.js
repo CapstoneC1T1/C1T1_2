@@ -5,13 +5,17 @@ const tran_category = async (req, res) => {
   try {
     const data = req.body;
     console.log("data: " + data);
-    db.db("BankingDB")
+    const result = await db.db("BankingDB")
       .collection("transactions")
+	  .insertOne(data);
+	  /**
       .insertOne(data, (err, data) => {
         if (err) return console.log("1" + err);
         console.log("2");
         res.send("seved to db: " + data);
       });
+	  **/
+	  console.log(result);
 
     const new_data = new tran_model({ category: data.category });
     await new_data.save();
