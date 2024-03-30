@@ -42,6 +42,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
       },
       body: JSON.stringify({
         category: newCategoryName,
+		user_id: 1,
       }),
     })
       .then((response) => {
@@ -49,6 +50,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
           throw new Error("failed to store data in backend");
         }
       })
+	  .then((data) => console.log(data))
       .catch((error) => {
         console.error("Error storing data in backend:", error);
       });

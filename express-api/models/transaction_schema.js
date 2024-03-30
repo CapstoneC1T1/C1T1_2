@@ -7,7 +7,7 @@ const transaction_schema = new mongoose.Schema({
     required: true,
     unique: false,
     trim: true,
-    default: 'Default',
+    default: "Default",
   },
   note: {
     type: String,
@@ -31,6 +31,10 @@ const transaction_schema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
+  },
+  user_id: {
+    type: Number,
+    unique: true,
   },
 });
 

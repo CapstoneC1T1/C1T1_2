@@ -15,7 +15,7 @@ app.get("/api", (req, res) => {
 */
 
 app.use("/api/v1", transactions);
-app.use("*", (req, res) => res.status(404).json({ error: "not found" }));
+//app.use("*", (req, res) => res.status(404).json({ error: "not found" }));
 
 const port = 5000;
 app.listen(port, () => {

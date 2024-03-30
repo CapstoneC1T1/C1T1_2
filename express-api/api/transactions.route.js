@@ -5,6 +5,9 @@ const router = express.Router();
 const category_ctrl = require("./../controllers/transactions_ctrl.js");
 
 router.get("/transactions", category_ctrl.tran_category);
+router.get("/", (req, res) => {
+  res.send("hey");
+});
 /*
 router.post("/", async (req, res) => {
   try {
