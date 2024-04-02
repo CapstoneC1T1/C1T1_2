@@ -62,9 +62,9 @@ const data = {
 	};
        fetch("http://localhost:8000/api/v1/transactions", {
       method: "POST",
-      //headers: {
-        //"Content-Type": "application/json",
-      //},
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(data)
     })
       .then((response) => {

@@ -26,6 +26,13 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 app.use("/api/v1/transactions", category_ctrl.tran_category);
+/**
+app.use("/api/v1/transactions", (req, res) => {
+console.log("body: " + JSON.stringify(req.body));
+}
+
+);
+**/
 app.use("/api/v1/", (req, res) => {
   res.send("hey");
 });

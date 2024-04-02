@@ -21,7 +21,7 @@ const tran_category = async (req, res) => {
     const new_data = new tran_model(data);
 	console.log(data.category, new_data);
 	console.log("1");
-    await new_data.save();
+    //await new_data.save();
     //await tran_model.create(data);
 
     res.status(200).json({ message: "Data stored successfully" });
