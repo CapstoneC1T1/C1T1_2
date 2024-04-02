@@ -25,26 +25,47 @@ function TransactionItem({ transaction, categories, addCategory }) {
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
+	console.log("1");
   };
 
   const handleAddNewCategoryClick = () => {
     setCategoryError("");
     setShowCategoryModal(true);
+	console.log("2");
   };
 
   const handleCategoryNameChange = (event) => {
     const input = event.target.value;
-    setNewCategoryName(input);
-    fetch("/api/v1/transactions", {
+ setNewCategoryName(input);
+	  };
+
+  const handleNotesChange = (event) => {
+    setNotes(event.target.value);
+  };
+
+  const handleSaveCategory = () => {
+    sessionStorage.setItem(`category-${transaction.id}`, selectedCategory);
+    alert("Category has been saved.");
+	console.log("3");
+  };
+
+  const handleSaveNewCategory = () => {
+    if (newCategoryName.trim() !== "" && newCategoryName.length <= 15) {
+      addCategory(newCategoryName.trim());
+      setNewCategoryName("");
+      setShowCategoryModal(false); // close the modal
+	  console.log(newCategoryName);
+const data = {
+		category: newCategoryName,
+		buy_from: "Amazon",
+		user_id: 1,
+	};
+       fetch("http://localhost:8000/api/v1/transactions", {
       method: "POST",
       //headers: {
         //"Content-Type": "application/json",
       //},
-      body: {
-        category: input,
-		buy_from: "Amazon",
-		user_id: 1,
-      },
+      body: JSON.stringify(data)
     })
       .then((response) => {
         if (!response.ok) {
@@ -55,22 +76,8 @@ function TransactionItem({ transaction, categories, addCategory }) {
       .catch((error) => {
         console.error("Error storing data in backend:", error);
       });
-  };
+	  console.log(JSON.stringify(data));
 
-  const handleNotesChange = (event) => {
-    setNotes(event.target.value);
-  };
-
-  const handleSaveCategory = () => {
-    sessionStorage.setItem(`category-${transaction.id}`, selectedCategory);
-    alert("Category has been saved.");
-  };
-
-  const handleSaveNewCategory = () => {
-    if (newCategoryName.trim() !== "" && newCategoryName.length <= 15) {
-      addCategory(newCategoryName.trim());
-      setNewCategoryName("");
-      setShowCategoryModal(false); // close the modal
     } else {
       setCategoryError(
         "Please enter a valid category name (category name cannot be empty or too long).",

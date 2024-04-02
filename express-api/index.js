@@ -9,12 +9,13 @@ const mongo_password = process.env.C1_Mongodb_password_2;
 const uri = `mongodb+srv://${mongo_username}:${mongo_password}@cluster0.6ibfiyk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 //const uri = `mongodb+srv://${mongo_username}:${mongo_password}@cluster0.6ibfiyk.mongodb.net/`;
 
-const port = 5000;
+const port = 8000;
 
 const client = new MongoClient(uri, {
   maxPoolSize: 50,
   //wtimeoutMS: 2500,
   useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 /**
   .catch((err) => {

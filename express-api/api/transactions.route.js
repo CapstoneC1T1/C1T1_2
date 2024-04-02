@@ -1,6 +1,6 @@
 const express = require("./../node_modules/express");
 //const transactionCtrl = require("./transactionsCtrl.controller.js");
-//const tran_model = require("./../models/transaction_schema.js");
+const tran_model = require("./../models/transaction_schema.js");
 const router = express.Router();
 const category_ctrl = require("./../controllers/transactions_ctrl.js");
 
