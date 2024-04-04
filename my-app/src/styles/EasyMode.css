@@ -1,34 +1,35 @@
 .card-left {
   width: 20%;
   margin-left: 6%;
-  border: solid;
-  border-width: 1.5px;
-  border-color: rgb(0, 0, 0);
   text-align: center;
 }
 
 .card-headers {
-  background-color: #004977;
-  color: white;
+  background-color: #004977!important;
+  color: white!important;
+  border-color: #004977!important;
   margin: 0;
   padding-top: 0.5rem;
+  font-weight: bold;
 }
 
 .card-body-1 {
   background-color: #004977;
-  color: white;
+  color: white!important;
   font-size: larger;
-  padding: 0.5rem 0rem;
+  padding: 0rem 1rem 0.5rem 1rem!important; 
+  /* height: 1%!important; */
 }
 
 .card-body-2 {
   background-color: grey;
-  font-weight: bold;
-  padding: 0.5rem 0rem;
+  font-weight:bolder;
+  font-size: large;
+  padding: 0.5rem 0rem!important;
 }
 
 .card-body-3 {
-  padding: 10rem 0rem;
+  height: 100%!important;
 }
 
 .card-right {
@@ -50,7 +51,8 @@
   margin-top: 5rem;
   width: fit-content;
   background-color: white;
-  border-width: 0;
+  border-width: 0!important;
+  padding: 0!important;
 }
 
 .credit-card {
@@ -61,15 +63,15 @@
   color: white;
   display: flex;
   margin-bottom: 2rem;
+  padding-right: 1rem;
 }
 
 .credit-card-button {
-  margin: 20% 20%;
-  width: 8rem;
+  margin: 20% 0%;
+  width: 7rem;
   height: 4rem;
   color: #004977;
-  font-weight: bold;
-  font-size: large;
+  font-weight: bold!important;
 }
 
 .send-money {
@@ -79,12 +81,16 @@
   background-color: #004977;
 }
 
+.payment-methods {
+  background-color: #004977;
+}
+
 .trans-button {
-  margin-left: 1.1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  color: #004977;
-  font-weight: bold;
+  font-weight: bold!important;
+  color: #004977!important;
+  margin: 7px;
+  width: 4rem;
+  padding: 0!important;
 }
 
 .deposit-money {
@@ -95,8 +101,8 @@
 }
 
 .deposit-button {
-  color: #004977;
-  font-weight: bold;
+  font-weight: bold!important;
+  color: #004977!important;
   width: 80%;
   margin: 0.5rem 10%;
 }

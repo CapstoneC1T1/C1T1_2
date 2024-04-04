@@ -8,7 +8,7 @@ import Navigation from "./Navbar";
 function TransactionPage() {
   return (
     <>
-      <div className="App">
+      <div>
         <Header />
         <PageTitle title="Checking Account" amount="$1000" />
         <TransactionList />

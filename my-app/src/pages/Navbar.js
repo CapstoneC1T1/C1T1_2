@@ -5,14 +5,13 @@ import { Link } from "react-router-dom";
 
 function Navigation() {
   return (
-    <Navbar bg="dark" variant="dark" sticky="top" expand="sm" collapseOnSelect>
+    <Navbar bg="light" expand="sm" collapseOnSelect>
       <Container>
         <Nav>
-          <Nav.Link as={Link} to="/" style={{ paddingRight: 10 }}>
+          <Nav.Link as={Link} to="/" style={{ paddingRight: 10, fontWeight: "bold", color: "#004977" }}>
             Home
           </Nav.Link>
-          {/* <br></br> */}
-          <Nav.Link as={Link} to="/easy-mode">
+          <Nav.Link as={Link} to="/easy-mode" style={{fontWeight: "bold", color: "#004977"}}>
             Easy Mode Page
           </Nav.Link>
         </Nav>
