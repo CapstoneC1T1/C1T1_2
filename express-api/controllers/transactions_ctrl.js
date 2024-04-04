@@ -4,7 +4,8 @@ const tran_model = require("./../models/transaction_schema.js");
 const tran_category = async (req, res) => {
   try {
     const data = req.body;
-    console.log("data: " + data);
+	console.log(data);
+    console.log("data: " + JSON.stringify(data));
     const result = await db.db("BankingDB")
       .collection("transactions")
 	  .insertOne(data);
@@ -17,8 +18,10 @@ const tran_category = async (req, res) => {
 	  **/
 	  console.log(result);
 
-    const new_data = new tran_model({ category: data.category });
-    await new_data.save();
+    const new_data = new tran_model(data);
+	console.log(data.category, new_data);
+	console.log("1");
+    //await new_data.save();
     //await tran_model.create(data);
 
     res.status(200).json({ message: "Data stored successfully" });
