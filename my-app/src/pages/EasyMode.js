@@ -4,13 +4,20 @@ import Card from "react-bootstrap/Card";
 import "../styles/EasyMode.css";
 import { Button, ButtonGroup, Container, Image, CardGroup } from "react-bootstrap";
 import arrow from "../images/rightarrow.png";
+import AddTransaction from "../components/AddTransaction"
 
 function EasyMode() {
+  console.log(JSON.parse(sessionStorage.getItem('transactions')))
+
   return (
     <div>
       <Header />
-      <div className="title-region">
-        <p className="page-title">Personal Banking</p>
+      <br></br>
+      <div className="title-region" style={{ display: 'flex', alignItems: 'center' }}>
+        <p className="page-title" >Personal Banking</p>
+        <div style={{ marginLeft: 'auto' }}>
+          <AddTransaction />
+        </div>
       </div>
       {/* Spacing here and on first page needs to be consistent. */}
       <div style={{ display: "flex", marginTop: "2rem" }}>
