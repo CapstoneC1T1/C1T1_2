@@ -10,7 +10,7 @@ function Header() {
     <Container className="">
       <Row>
         <Col lg={12}>
-          <Image src={logo} height={100} style={{padding:"1rem 0"}}/>
+          <Image src={logo} height={100} style={{ padding: "1rem 0" }} />
         </Col>
         <Col>
           <Navigation className="header"></Navigation>

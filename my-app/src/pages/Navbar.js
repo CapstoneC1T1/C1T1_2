@@ -8,10 +8,18 @@ function Navigation() {
     <Navbar bg="light" expand="sm" collapseOnSelect>
       <Container>
         <Nav>
-          <Nav.Link as={Link} to="/" style={{fontWeight: "bold", color: "#004977"}}>
+          <Nav.Link
+            as={Link}
+            to="/"
+            style={{ fontWeight: "bold", color: "#004977" }}
+          >
             Home
           </Nav.Link>
-          <Nav.Link as={Link} to="/transaction" style={{ paddingRight: 10, fontWeight: "bold", color: "#004977" }}>
+          <Nav.Link
+            as={Link}
+            to="/transaction"
+            style={{ paddingRight: 10, fontWeight: "bold", color: "#004977" }}
+          >
             Transactions
           </Nav.Link>
         </Nav>

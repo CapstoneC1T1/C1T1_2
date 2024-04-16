@@ -8,7 +8,7 @@ export default function PagesRouter() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<EasyMode />} />
-        <Route path="/transaction" element={<TransactionPage/>} />
+        <Route path="/transaction" element={<TransactionPage />} />
         <Route path="*" element={<WrongSite />} />
       </Routes>
     </BrowserRouter>

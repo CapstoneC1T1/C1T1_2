@@ -132,10 +132,10 @@
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  max-width: 600px; 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .modal-content button {
@@ -146,10 +146,10 @@
   padding: 10px 15px;
   font-size: 14px;
   cursor: pointer;
-  margin-left: auto; 
-  margin-right: auto; 
-  display: block; 
-  max-width: 200px; 
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  max-width: 200px;
 }
 
 .modal-content input[type="text"] {
@@ -157,15 +157,14 @@
   border-radius: 4px;
   padding: 10px;
   font-size: 14px;
-  width: 100%; 
-  box-sizing: border-box; 
+  width: 100%;
+  box-sizing: border-box;
   max-width: 500px;
-  margin-bottom: 1rem; 
-  display: block; 
-  margin-left: auto; 
-  margin-right: auto; 
+  margin-bottom: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
-
 
 :not(.bootstrap) .close {
   color: #aaa;

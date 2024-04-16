@@ -4,9 +4,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 
 function TransactionItem({ transaction, categories, addCategory }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(
-    transaction.category || "Select Category",
-  );
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [notes, setNotes] = useState(transaction.notes || "");
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState("");
@@ -17,6 +15,24 @@ function TransactionItem({ transaction, categories, addCategory }) {
     if (savedNotes) {
       setNotes(savedNotes);
     }
+    //set initial category
+	const data = JSON.stringify({id:transaction.id});
+    fetch("http://localhost:8000/api/v1/data", {
+      method: "POST",
+	  headers: {
+"Content-Type": "application/json"
+	  },
+      body: data
+    })
+      .then(response => response.json())
+      .then(data => {
+	  console.log(data);
+	  const category_res = data.category;
+	  console.log(category_res);
+	  setSelectedCategory(category_res);
+	  })
+      .catch((error) => console.log("Error in Item file:", error));
+	  console.log(selectedCategory);
   }, [transaction.id]);
 
   const handleSummaryClick = (event) => {
@@ -26,19 +42,19 @@ function TransactionItem({ transaction, categories, addCategory }) {
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
-	console.log("1");
+    console.log("1");
   };
 
   const handleAddNewCategoryClick = () => {
     setCategoryError("");
     setShowCategoryModal(true);
-	console.log("2");
+    console.log("2");
   };
 
   const handleCategoryNameChange = (event) => {
     const input = event.target.value;
- setNewCategoryName(input);
-	  };
+    setNewCategoryName(input);
+  };
 
   const handleNotesChange = (event) => {
     setNotes(event.target.value);
@@ -47,7 +63,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
   const handleSaveCategory = () => {
     sessionStorage.setItem(`category-${transaction.id}`, selectedCategory);
     alert("Category has been saved.");
-	console.log("3");
+    console.log("3");
   };
 
   const handleSaveNewCategory = () => {
@@ -56,30 +72,29 @@ function TransactionItem({ transaction, categories, addCategory }) {
       addCategory(newCategoryName.trim());
       setNewCategoryName("");
       setShowCategoryModal(false); // close the modal
-	  console.log(newCategoryName);
-const data = {
-		category: newCategoryName,
-		buy_from: "Amazon",
-		user_id: 1,
-	};
-       fetch("http://localhost:8000/api/v1/transactions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data)
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("failed to store data in backend");
-        }
+      console.log(newCategoryName);
+      const data = {
+        category: newCategoryName,
+        buy_from: "Amazon",
+        user_id: 1,
+      };
+      fetch("http://localhost:8000/api/v1/transactions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       })
-	  .then((data) => console.log(data))
-      .catch((error) => {
-        console.error("Error storing data in backend:", error);
-      });
-	  console.log(JSON.stringify(data));
-
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("failed to store data in backend");
+          }
+        })
+        .then((data) => console.log(data))
+        .catch((error) => {
+          console.error("Error storing data in backend:", error);
+        });
+      console.log(JSON.stringify(data));
     } else {
       setCategoryError(
         "Please enter a valid category name (category name cannot be empty or too long).",
@@ -114,7 +129,7 @@ const data = {
               onChange={handleCategoryChange}
             >
               <option value="Select Category" disabled>
-                Select Category
+                
               </option>
               {categories.map((category, index) => (
                 <option key={index} value={category}>
@@ -150,10 +165,12 @@ const data = {
             <Modal show={showCategoryModal}>
               <Modal.Body>
                 Enter new category name:
-                <Form.Control onChange={(value) => {
-                  setNewCategoryName(value.target.value);
-                  console.log(typeof value.target.value);
-                  }}/>
+                <Form.Control
+                  onChange={(value) => {
+                    setNewCategoryName(value.target.value);
+                    console.log(typeof value.target.value);
+                  }}
+                />
               </Modal.Body>
               <Modal.Footer>
                 <Button onClick={() => setShowCategoryModal(false)}>

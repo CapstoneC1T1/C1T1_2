@@ -9,6 +9,7 @@ import TransactionPage from "./pages/TransactionPage";
 function App() {
   const [backendData, setBackendData] = useState([{}]);
 
+  /**
   useEffect(() => {
     fetch("/api")
       .then((response) => response.json())
@@ -16,6 +17,7 @@ function App() {
         setBackendData(data);
       });
   }, []);
+  **/
 
   return <PagesRouter />;
 }
