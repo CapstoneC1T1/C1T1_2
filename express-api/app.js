@@ -5,6 +5,7 @@ const bodyParser = require("./node_modules/body-parser");
 const router = express.Router();
 const category_ctrl = require("./controllers/transactions_ctrl.js");
 const get_data = require("./controllers/get_data_ctrl.js");
+const modify_fields = require("./controllers/modify_fields.js");
 
 const app = express();
 
@@ -27,7 +28,8 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 app.use("/api/v1/transactions", category_ctrl.tran_category);
-app.use('/api/v1/data', get_data.get_tran_data);
+app.use("/api/v1/data", get_data.get_tran_data);
+app.use("/api/v1/note", modify_fields.modify_note);
 /**
 app.use("/api/v1/transactions", (req, res) => {
 console.log("body: " + JSON.stringify(req.body));
@@ -40,7 +42,6 @@ app.use("/api/v1/", (req, res) => {
   res.send("hey");
 });
 **/
-
 
 //export default app;
 module.exports = app;

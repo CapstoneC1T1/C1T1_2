@@ -16,23 +16,25 @@ function TransactionItem({ transaction, categories, addCategory }) {
       setNotes(savedNotes);
     }
     //set initial category
-	const data = JSON.stringify({id:transaction.id});
+    const data = JSON.stringify({ id: transaction.id });
     fetch("http://localhost:8000/api/v1/data", {
       method: "POST",
-	  headers: {
-"Content-Type": "application/json"
-	  },
-      body: data
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
     })
-      .then(response => response.json())
-      .then(data => {
-	  console.log(data);
-	  const category_res = data.category;
-	  console.log(category_res);
-	  setSelectedCategory(category_res);
-	  })
+      .then((response) => response.json())
+      .then((data) => {
+        //console.log(data);
+        const category_res = data.category;
+        const note = data.note;
+        console.log(category_res);
+        setSelectedCategory(category_res);
+        setNotes(note);
+      })
       .catch((error) => console.log("Error in Item file:", error));
-	  console.log(selectedCategory);
+    console.log(selectedCategory);
   }, [transaction.id]);
 
   const handleSummaryClick = (event) => {
@@ -105,6 +107,24 @@ function TransactionItem({ transaction, categories, addCategory }) {
   const handleSaveNotes = () => {
     sessionStorage.setItem(`notes-${transaction.id}`, notes);
     alert("Notes have been saved.");
+    const data = JSON.stringify({
+      id: transaction.id,
+      note: notes,
+    });
+	console.log(data);
+    fetch("http://localhost:8000/api/v1/note", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const note = data.note;
+        setNotes(note);
+      })
+      .catch((error) => console.log("Error in Item file(2):", error));
   };
 
   return (
@@ -128,9 +148,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
               value={selectedCategory}
               onChange={handleCategoryChange}
             >
-              <option value="Select Category" disabled>
-                
-              </option>
+              <option value="Select Category" disabled></option>
               {categories.map((category, index) => (
                 <option key={index} value={category}>
                   {category}
