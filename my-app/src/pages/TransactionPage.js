@@ -17,7 +17,7 @@ function TransactionPage() {
         <div className="title-region" style={{ display: 'flex', alignItems: 'center' }}>
           <PageTitle title="Checking Account" amount="$1000" />
           <div style={{ marginLeft: 'auto' }}>
-            <AddTransaction />
+            {/* <AddTransaction /> */}
           </div>
         </div>
         <TransactionList />

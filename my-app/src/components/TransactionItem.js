@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/TransactionItem.css";
+import { Modal, Button, Form } from "react-bootstrap";
 
 function TransactionItem({ transaction, categories, addCategory }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -50,6 +51,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
   };
 
   const handleSaveNewCategory = () => {
+    console.log(typeof newCategoryName);
     if (newCategoryName.trim() !== "" && newCategoryName.length <= 15) {
       addCategory(newCategoryName.trim());
       setNewCategoryName("");
@@ -120,7 +122,7 @@ const data = {
                 </option>
               ))}
             </select>
-            {showCategoryModal && (
+            {/* {showCategoryModal && (
               <div className="modal">
                 <div className="modal-content">
                   <span
@@ -144,7 +146,24 @@ const data = {
                   )}
                 </div>
               </div>
-            )}
+            )} */}
+            <Modal show={showCategoryModal}>
+              <Modal.Body>
+                Enter new category name:
+                <Form.Control onChange={(value) => {
+                  setNewCategoryName(value.target.value);
+                  console.log(typeof value.target.value);
+                  }}/>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={() => setShowCategoryModal(false)}>
+                  Close
+                </Button>
+                <Button onClick={handleSaveNewCategory}>
+                  Save New Category
+                </Button>
+              </Modal.Footer>
+            </Modal>
             <button onClick={handleAddNewCategoryClick}>+ Add New</button>
             <button onClick={handleSaveCategory}>Save Category</button>
           </div>
