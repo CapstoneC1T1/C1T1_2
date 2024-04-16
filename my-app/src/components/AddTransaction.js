@@ -39,7 +39,7 @@ function AddTransaction() {
 
   return (
     <div>
-      <Button onClick={handleButtonClick}>Add Values</Button>
+      <Button onClick={handleButtonClick} style={{backgroundColor: "#004a99", borderColor: "black"}}>Add Values</Button>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Add Values</Modal.Title>
