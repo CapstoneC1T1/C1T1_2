@@ -1,11 +1,12 @@
 const db = require("./../index.js");
 
+//the order here must be req, res can't change the order
 const get_tran_data = async (req, res) => {
   try {
     //console.log(req.body);
     const tran_id = req.body.id;
     //console.log(tran_id);
-    const data = await db.db("BankingDB").collection("transactions").findOne({
+    const data = await db.db("BankingDB").collection("transaction").findOne({
       user_id: tran_id,
     });
     //console.log(data);

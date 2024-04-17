@@ -17,7 +17,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
     }
     //set initial category
     const data = JSON.stringify({ id: transaction.id });
-    fetch("http://localhost:8000/api/v1/data", {
+    fetch(`http://localhost:${window.backend_port}/api/v1/data`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
   const handleAddNewCategoryClick = () => {
     setCategoryError("");
     setShowCategoryModal(true);
-    console.log("2");
+    //console.log("2");
   };
 
   const handleCategoryNameChange = (event) => {
@@ -65,7 +65,6 @@ function TransactionItem({ transaction, categories, addCategory }) {
   const handleSaveCategory = () => {
     sessionStorage.setItem(`category-${transaction.id}`, selectedCategory);
     alert("Category has been saved.");
-    console.log("3");
   };
 
   const handleSaveNewCategory = () => {
@@ -77,10 +76,9 @@ function TransactionItem({ transaction, categories, addCategory }) {
       console.log(newCategoryName);
       const data = {
         category: newCategoryName,
-        buy_from: "Amazon",
-        user_id: 1,
+        id: transaction.id,
       };
-      fetch("http://localhost:8000/api/v1/transactions", {
+      fetch(`http://localhost:${window.backend_port}/api/v1/category`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -111,8 +109,8 @@ function TransactionItem({ transaction, categories, addCategory }) {
       id: transaction.id,
       note: notes,
     });
-	console.log(data);
-    fetch("http://localhost:8000/api/v1/note", {
+    console.log(data);
+    fetch(`http://localhost:${window.backend_port}/api/v1/note`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

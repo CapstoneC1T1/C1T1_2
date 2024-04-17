@@ -4,7 +4,7 @@ const modify_note = async (req, res) => {
   try {
     const tran_id = req.body.id;
     const filter = { user_id: tran_id };
-	console.log(req.body.note);
+    console.log(req.body.note);
     const note_to_save = {
       $set: {
         note: req.body.note,
@@ -12,7 +12,7 @@ const modify_note = async (req, res) => {
     };
     const result = await db
       .db("BankingDB")
-      .collection("transactions")
+      .collection("transaction")
       .updateOne(filter, note_to_save);
     res.status(200).json({ message: "Data(notes) stored successfully" });
   } catch (error) {

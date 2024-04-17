@@ -13,7 +13,7 @@ import arrow from "../images/rightarrow.png";
 import AddTransaction from "../components/AddTransaction";
 
 function EasyMode() {
-  console.log(JSON.parse(sessionStorage.getItem("transactions")));
+  //console.log(JSON.parse(sessionStorage.getItem("transactions")));
 
   return (
     <div>
