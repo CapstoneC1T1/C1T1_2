@@ -153,31 +153,6 @@ function TransactionItem({ transaction, categories, addCategory }) {
                 </option>
               ))}
             </select>
-            {/* {showCategoryModal && (
-              <div className="modal">
-                <div className="modal-content">
-                  <span
-                    className="close"
-                    onClick={() => setShowCategoryModal(false)}
-                  >
-                    &times;
-                  </span>
-                  <label htmlFor="new-category-name">New Category Name:</label>
-                  <input
-                    id="new-category-name"
-                    type="text"
-                    value={newCategoryName}
-                    onChange={handleCategoryNameChange}
-                  />
-                  <button onClick={handleSaveNewCategory}>
-                    Save New Category
-                  </button>
-                  {categoryError && (
-                    <p className="error-message">{categoryError}</p>
-                  )}
-                </div>
-              </div>
-            )} */}
             <Modal show={showCategoryModal}>
               <Modal.Body>
                 Enter new category name:

@@ -21,15 +21,37 @@
   margin-top: 0.5rem;
 }
 
+.transaction-name {
+  width: 30%; 
+  overflow: hidden; 
+  white-space: nowrap;
+  text-overflow: ellipsis; 
+}
+
 .transaction-date {
   margin: 0;
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
+  text-align: center;
+  width: 40%; 
 }
+
+.transaction-amount {
+  width: 30%; 
+  text-align: right; 
+  padding-right: 10px; 
+}
+
 
 .transaction-item:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.transaction-date,
+.transaction-time {
+  margin: 0;
 }
 
 .transaction-summary {
