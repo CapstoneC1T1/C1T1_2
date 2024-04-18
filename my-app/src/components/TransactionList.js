@@ -22,6 +22,17 @@ const transactions = [
 function TransactionList() {
   const [categories, setCategories] = useState([]);
   const [transactions, setTransactions] = useState([]);
+
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const filteredTransactions = selectedCategory === 'All' ? transactions : 
+                            transactions.filter(transaction => transaction.category === selectedCategory);
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    console.log("Selected Category:", category);
+  }
+
+
   useEffect(() => {
     fetch_cat_list();
     fetch_tran_list();
@@ -90,15 +101,32 @@ function TransactionList() {
   };
 
   return (
-    <div className="transaction-list">
-      {transactions.map((transaction) => (
-        <TransactionItem
-          key={transaction.id}
-          transaction={transaction}
-          categories={categories}
-          addCategory={addCategory}
-        />
-      ))}
+    <div className="transaction-page">
+      <div className="transaction-list">
+        {transactions.map((transaction) => (
+          <TransactionItem
+            key={transaction.id}
+            transaction={transaction}
+            categories={categories}
+            addCategory={addCategory}
+          />
+        ))}
+      </div>
+      <div className="category-sidebar">
+        <button 
+          className={selectedCategory === 'All' ? 'active' : ''} 
+          onClick={()=> handleCategoryClick('All')}>
+          All
+        </button>
+        {categories.map((category, index) => (
+          <button 
+            key={index} 
+            className={selectedCategory === category ? 'active' : ''} 
+            onClick={() => handleCategoryClick(category)}>
+            {category}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
