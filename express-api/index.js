@@ -4,8 +4,8 @@ const mongodb = require("./node_modules/mongodb");
 
 const MongoClient = mongodb.MongoClient;
 
-const mongo_username = process.env.C1_Mongodb_username;
-const mongo_password = process.env.C1_Mongodb_password_2;
+const mongo_username = "HridayGupta";
+const mongo_password = "HridayGupta";
 const uri = `mongodb+srv://${mongo_username}:${mongo_password}@cluster0.6ibfiyk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 //const uri = `mongodb+srv://${mongo_username}:${mongo_password}@cluster0.6ibfiyk.mongodb.net/`;
 

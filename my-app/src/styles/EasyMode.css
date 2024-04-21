@@ -106,3 +106,13 @@
   width: 80%;
   margin: 0.5rem 10%;
 }
+
+.card-header-clickable {
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-header-clickable:hover {
+  background-color: #0056b3; /* Lighten the blue a bit on hover */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Add a slight shadow to lift the card */
+}
