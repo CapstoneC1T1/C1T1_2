@@ -64,6 +64,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
 
   const handleSaveCategory = () => {
     sessionStorage.setItem(`category-${transaction.id}`, selectedCategory);
+	console.log(selectedCategory);
 
     const data = JSON.stringify({
       id: transaction.id,
