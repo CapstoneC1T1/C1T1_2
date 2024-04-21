@@ -30,7 +30,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
         const category_res = data.category;
         const note = data.note;
         console.log(category_res);
-        setSelectedCategory(category_res);
+        //setSelectedCategory(category_res);
         setNotes(note);
       })
       .catch((error) => console.log("Error in Item file:", error));
@@ -44,7 +44,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
-    console.log("1");
+    console.log(selectedCategory, event.target.value);
   };
 
   const handleAddNewCategoryClick = () => {
@@ -64,6 +64,27 @@ function TransactionItem({ transaction, categories, addCategory }) {
 
   const handleSaveCategory = () => {
     sessionStorage.setItem(`category-${transaction.id}`, selectedCategory);
+
+    const data = JSON.stringify({
+      id: transaction.id,
+      category: selectedCategory,
+    });
+    console.log(data);
+    fetch(`http://localhost:${window.backend_port}/api/v1/save_category`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        //const note = data.note; //TODO
+        //setNotes(note);
+      })
+      .catch((error) => console.log("Error in Item file(2):", error));
+
+	//setSelectedCategory(event.target.value);
     alert("Category has been saved.");
   };
 

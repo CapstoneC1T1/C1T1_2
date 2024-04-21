@@ -9,10 +9,14 @@ const save_new_category = async (req, res) => {
       .collection("transaction")
       .findOne({ user_id: id });
     //console.log(result_find);
-    const transactions = {
-      tran_id: id,
-      amount: result_find.amount,
-    };
+    const transactions = [
+	/**
+      {
+        tran_id: id,
+        amount: result_find.amount,
+      },
+	  **/
+    ];
     //console.log("45");
     //find the max category id
     let cat_id;
@@ -38,6 +42,7 @@ const save_new_category = async (req, res) => {
       .collection("category")
       .insertOne(category);
     console.log(result);
+
   } catch (error) {
     console.error("Error storing category data: ", error);
     res.status(500).json({ error: "Failed to store category data" });
