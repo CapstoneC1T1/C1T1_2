@@ -17,11 +17,49 @@ import TransactionPage from "./TransactionPage";
 function EasyMode() {
   //console.log(JSON.parse(sessionStorage.getItem("transactions")));
   let navigate = useNavigate();
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    fetch_tran_list();
+  }, []);
 
   function handleClick() {
     navigate("/transaction");
   }
 
+  const fetch_tran_list = async () => {
+    fetch(`http://localhost:8000/api/v1/list`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Transaction list failed to load.");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        //console.log(data);
+        let lists = [];
+        data.forEach((transaction) => {
+          //console.log(transaction);
+          const trimmed_tran = {
+            id: transaction.user_id,
+            name: transaction.buy_from,
+            date: transaction.date,
+            time: transaction.time,
+            amount: transaction.amount,
+            category: transaction.category,
+          };
+          lists.push(trimmed_tran);
+        });
+        //transactions = data;
+        setTransactions(lists);
+        //console.log(lists);
+      })
+      .catch((error) => {
+        console.error("List.js file: ", error);
+      });
+  };
+
+  /**
   const transactions = [
     { id: 1, name: "Amazon", date: "01/23/2024", time: "10:23", amount: 20 },
     { id: 2, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
@@ -34,6 +72,7 @@ function EasyMode() {
     { id: 9, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
   ];
 
+**/
   return (
     <div>
       <Header />

@@ -30,6 +30,7 @@ function TransactionList() {
       : transactions.filter(
           (transaction) => transaction.category === selectedCategory,
         );
+  //console.log(filteredTransactions);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -60,6 +61,7 @@ function TransactionList() {
             date: transaction.date,
             time: transaction.time,
             amount: transaction.amount,
+            category: transaction.category,
           };
           lists.push(trimmed_tran);
         });
@@ -113,7 +115,7 @@ function TransactionList() {
   return (
     <div className="transaction-page">
       <div className="transaction-list">
-        {transactions.map((transaction) => (
+        {filteredTransactions.map((transaction) => (
           <TransactionItem
             key={transaction.id}
             transaction={transaction}
