@@ -4,7 +4,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 
 function TransactionItem({ transaction, categories, addCategory }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("default");
   const [notes, setNotes] = useState(transaction.notes || "");
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState("");
@@ -64,7 +64,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
 
   const handleSaveCategory = () => {
     sessionStorage.setItem(`category-${transaction.id}`, selectedCategory);
-	console.log(selectedCategory);
+    console.log(selectedCategory);
 
     const data = JSON.stringify({
       id: transaction.id,
@@ -85,7 +85,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
       })
       .catch((error) => console.log("Error in Item file(2):", error));
 
-	//setSelectedCategory(event.target.value);
+    //setSelectedCategory(event.target.value);
     alert("Category has been saved.");
   };
 
@@ -170,7 +170,11 @@ function TransactionItem({ transaction, categories, addCategory }) {
             >
               <option value="Select Category" disabled></option>
               {categories.map((category, index) => (
-                <option key={index} value={category}>
+                <option
+                  key={index}
+                  value={category}
+                  onChange={(value) => setSelectedCategory(value.target.value)}
+                >
                   {category}
                 </option>
               ))}

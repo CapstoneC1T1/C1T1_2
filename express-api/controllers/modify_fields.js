@@ -47,7 +47,7 @@ const modify_category = async (req, res) => {
       .db("BankingDB")
       .collection("transaction")
       .updateOne(filter, category_to_set);
-	  console.log(result);
+    console.log(result);
 
     //update category collection
     //add transaction under the new category

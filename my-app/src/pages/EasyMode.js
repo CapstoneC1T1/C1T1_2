@@ -11,15 +11,15 @@ import {
 } from "react-bootstrap";
 import arrow from "../images/rightarrow.png";
 import AddTransaction from "../components/AddTransaction";
-import { useNavigate } from 'react-router-dom';
-import TransactionPage from "./TransactionPage";  
+import { useNavigate } from "react-router-dom";
+import TransactionPage from "./TransactionPage";
 
 function EasyMode() {
   //console.log(JSON.parse(sessionStorage.getItem("transactions")));
   let navigate = useNavigate();
 
   function handleClick() {
-    navigate('/transaction')
+    navigate("/transaction");
   }
 
   const transactions = [
@@ -50,26 +50,45 @@ function EasyMode() {
       {/* Spacing here and on first page needs to be consistent. */}
       <div style={{ display: "flex", marginTop: "2rem" }}>
         <Card className="card-left" border="dark border-2">
-
-            <Card.Header as="h4" className="card-headers card-header-clickable" text="white" onClick={handleClick}>
-              Checking Account
-            </Card.Header>
-            <Card.Body className="card-body-1 card-headers card-header-clickable" style={{ height: "-2rem" }} onClick={handleClick}>
-              <Card.Text style={{ margin: 0 }}>xxxxxxxx1234</Card.Text>
-              <Card.Text>$1000</Card.Text>
-            </Card.Body>
+          <Card.Header
+            as="h4"
+            className="card-headers card-header-clickable"
+            text="white"
+            onClick={handleClick}
+          >
+            Checking Account
+          </Card.Header>
+          <Card.Body
+            className="card-body-1 card-headers card-header-clickable"
+            style={{ height: "-2rem" }}
+            onClick={handleClick}
+          >
+            <Card.Text style={{ margin: 0 }}>xxxxxxxx1234</Card.Text>
+            <Card.Text>$1000</Card.Text>
+          </Card.Body>
           <Card.Body className="card-body-2">
             <Card.Text style={{ margin: 0 }}>Recent Transactions</Card.Text>
           </Card.Body>
-          <Card.Body className="card-body-3" style={{maxHeight: "300px", overflowY: "auto"}}>
-          {transactions.map(transaction => (
-            <Card key={transaction.id} className="mb-3" style={{ border: '1px solid #ccc' }}>
-              <Card.Body>
-                <p>{transaction.name} | Amount: ${transaction.amount}</p>
-                <p>{transaction.date} {transaction.time}</p>
-              </Card.Body>
-            </Card>
-          ))}
+          <Card.Body
+            className="card-body-3"
+            style={{ maxHeight: "300px", overflowY: "auto" }}
+          >
+            {transactions.map((transaction) => (
+              <Card
+                key={transaction.id}
+                className="mb-3"
+                style={{ border: "1px solid #ccc" }}
+              >
+                <Card.Body>
+                  <p>
+                    {transaction.name} | Amount: ${transaction.amount}
+                  </p>
+                  <p>
+                    {transaction.date} {transaction.time}
+                  </p>
+                </Card.Body>
+              </Card>
+            ))}
           </Card.Body>
         </Card>
 
@@ -167,9 +186,6 @@ function EasyMode() {
       </div>
     </div>
   );
-  
 }
-
-
 
 export default EasyMode;
