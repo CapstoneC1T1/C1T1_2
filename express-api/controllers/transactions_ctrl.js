@@ -45,7 +45,7 @@ console.log(max_id);
     data_json.user_id = max_id;
     data_json.date = date;
     data_json.time = time;
-    data_json.category = "default";
+    data_json.category = "Default";
     data_json.note = "";
     //data_json = JSON.stringify(data_json);
     //console.log(data);
@@ -54,6 +54,55 @@ console.log(max_id);
       .db("BankingDB")
       .collection("transaction")
       .insertOne(data_json);
+
+    //if Default category hasn't been created
+    const result_find_default = await db
+      .db("BankingDB")
+      .collection("category")
+      .findOne({
+        name: "Default",
+      });
+    console.log(result_find_default);
+    if (result_find_default == null) {
+      //add a new category named default
+      let cat_id;
+      const result_sort = await db
+        .db("BankingDB")
+        .collection("category")
+        .find({})
+        .sort({ id: -1 })
+        .limit(1)
+        .toArray();
+      console.log(result_sort);
+      if (result_sort[0] == null) cat_id = 1;
+      else {
+        cat_id = result_sort[0].id + 1;
+      }
+      const transactions = [];
+      const default_category = {
+        id: cat_id,
+        name: "Default",
+        transactions: transactions,
+      };
+      const result = await db
+        .db("BankingDB")
+        .collection("category")
+        .insertOne(default_category);
+    }
+    //add this transaction to the default category
+    const add_tran_to_default = {
+      $push: {
+        transactions: {
+          tran_id: max_id,
+          amount: req.body.amount,
+        },
+      },
+    };
+    const filter_default = { name: "Default" };
+    const result_add = await db
+      .db("BankingDB")
+      .collection("category")
+      .updateOne(filter_default, add_tran_to_default);
     /**
       .insertOne(data, (err, data) => {
         if (err) return console.log("1" + err);

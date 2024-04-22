@@ -82,12 +82,18 @@ function TransactionList() {
       })
       .then((data) => {
         //console.log(data);
-        if (data == null) setCategories("Default");
+        if (data == null)
+          setCategories(["Default"]); //TODO:
         else {
           let category_list = [];
           data.forEach((category) => {
             category_list.push(category.name);
           });
+          var string_to_remove = "Default";
+          category_list = category_list.filter(function (item) {
+            return item !== string_to_remove;
+          });
+          category_list.unshift(string_to_remove);
           setCategories(category_list);
         }
       })
@@ -95,6 +101,7 @@ function TransactionList() {
         console.log("list.js category list: ", error);
       });
   };
+
   const addCategory = (newCategory) => {
     if (!categories.includes(newCategory)) {
       setCategories((prevCategories) => [...prevCategories, newCategory]);

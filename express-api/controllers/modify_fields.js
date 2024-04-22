@@ -69,20 +69,18 @@ const modify_category = async (req, res) => {
         .updateOne(filter_new, add_tran_to_category);
 
       //delete transaction under old category
-      if (!(old_category === "default")) {
-        const remove_tran = {
-          $pull: {
-            transactions: {
-              tran_id: tran_id,
-              amount: result_find.amount,
-            },
+      const remove_tran = {
+        $pull: {
+          transactions: {
+            tran_id: tran_id,
+            amount: result_find.amount,
           },
-        };
-        const result_remove = await db
-          .db("BankingDB")
-          .collection("category")
-          .updateOne(filter_old, remove_tran);
-      }
+        },
+      };
+      const result_remove = await db
+        .db("BankingDB")
+        .collection("category")
+        .updateOne(filter_old, remove_tran);
     }
     res.status(200).json({ message: "category modified!" });
   } catch (error) {
