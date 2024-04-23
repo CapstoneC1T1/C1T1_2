@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Modal from 'react-modal';
 import "../styles/TransactionList.css";
 import TransactionItem from "./TransactionItem";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
@@ -141,33 +142,43 @@ function TransactionList() {
             addCategory={addCategory}
           />
         ))}
-        {showChart && dataForPieChart.length > 0 && (
-          <div style={{ position: "relative", width: "100%", height: "400px" }}>
-            <PieChart width={800} height={400}>
-              <Pie
-                data={dataForPieChart}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                label={({ name, amount, percentage }) =>
-                  `${name}: $${amount} (${percentage}%)`
-                }
-                outerRadius={150}
-                fill="#8884d8"
-                dataKey="amount" // Change dataKey to "amount"
-              >
-                {dataForPieChart.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-              <Tooltip formatter={(value, name) => ["$" + value, name]} />
-              <Legend />
-            </PieChart>
-          </div>
-        )}
+        <Modal
+          isOpen={showChart}
+          onRequestClose={handleShowChart}
+          contentLabel="Transaction Pie Chart"
+          style={{
+            content: {
+              top: '50%',
+              left: '50%',
+              right: 'auto',
+              bottom: 'auto',
+              transform: 'translate(-50%, -50%)',
+              width: '65%',
+              fontFamily: '"Calibri", sans-serif'
+            }     
+          }}
+        >
+          <PieChart width={800} height={400}>
+            <Pie
+              data={dataForPieChart}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={({ name, amount, percentage }) =>
+                `${name}: $${amount} (${percentage}%)`
+              }
+              outerRadius={150}
+              fill="#8884d8"
+              dataKey="amount"
+            >
+              {dataForPieChart.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip formatter={(value, name) => ["$" + value, name]} />
+            <Legend />
+          </PieChart>
+        </Modal>
       </div>
       <div className="category-sidebar">
         <button
