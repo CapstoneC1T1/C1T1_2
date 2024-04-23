@@ -16,6 +16,7 @@ function AddTransaction() {
   const [allTransactions, setAllTransactions] = useState(
     JSON.parse(sessionStorage.getItem("transactions")) || [],
   );
+  const [total, setTotal] = useState(JSON.parse(sessionStorage.getItem("total")))
   const vendorValue = useRef();
   const amountValue = useRef();
 
@@ -25,6 +26,10 @@ function AddTransaction() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Decreases the value of total and saves it when making a transaction
+    setTotal(total - parseInt(amountValue.current.value))
+    sessionStorage.setItem("total", total)
 
     // Process the input values
     const newTransaction = {
