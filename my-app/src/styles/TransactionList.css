@@ -9,14 +9,14 @@
 }
 
 .show-chart-button {
-  position: absolute; 
+  position: absolute;
   max-width: 10%;
-  bottom: 20px; 
-  background-color: #e9ecef; 
+  bottom: 20px;
+  background-color: #e9ecef;
   color: #333;
-  border: 1px solid #ccc; 
-  border-radius: 4px; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .transaction-list {

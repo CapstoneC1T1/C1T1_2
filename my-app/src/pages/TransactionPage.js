@@ -11,7 +11,9 @@ function TransactionPage() {
   //console.log(JSON.parse(sessionStorage.getItem("transactions")));
 
   // Temp value, could potentially display
-  const [total, setTotal] = useState(JSON.parse(sessionStorage.getItem("total")) || 0);
+  const [total, setTotal] = useState(
+    JSON.parse(sessionStorage.getItem("total")) || 0,
+  );
 
   return (
     <>
@@ -27,7 +29,7 @@ function TransactionPage() {
           <div style={{ marginLeft: "auto" }}>{/* <AddTransaction /> */}</div>
         </div>
         <TransactionList />
-      </div>  
+      </div>
     </>
   );
 }

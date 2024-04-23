@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../styles/TransactionList.css";
 import TransactionItem from "./TransactionItem";
-import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'; 
+import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 function TransactionList() {
   const [categories, setCategories] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [showChart, setShowChart] = useState(false);
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const filteredTransactions =
@@ -116,10 +116,10 @@ function TransactionList() {
   const dataForPieChart = React.useMemo(() => {
     const categoryTotals = calculateCategoryTotals(transactions);
     const totalSpending = calculateTotalSpending(categoryTotals);
-  
+
     return Object.entries(categoryTotals).map(([name, amount]) => ({
       name,
-      amount, 
+      amount,
       percentage: ((amount / totalSpending) * 100).toFixed(2),
     }));
   }, [transactions]);
@@ -128,7 +128,7 @@ function TransactionList() {
     setShowChart(!showChart);
   };
 
-  // console.log(dataForPieChart); 
+  // console.log(dataForPieChart);
 
   return (
     <div className="transaction-page">
@@ -141,29 +141,33 @@ function TransactionList() {
             addCategory={addCategory}
           />
         ))}
-        {showChart && dataForPieChart.length > 0 && ( 
-          <div style={{ position: 'relative', width: '100%', height: '400px' }}>
+        {showChart && dataForPieChart.length > 0 && (
+          <div style={{ position: "relative", width: "100%", height: "400px" }}>
             <PieChart width={800} height={400}>
               <Pie
                 data={dataForPieChart}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={({ name, amount, percentage }) => `${name}: $${amount} (${percentage}%)`}
+                label={({ name, amount, percentage }) =>
+                  `${name}: $${amount} (${percentage}%)`
+                }
                 outerRadius={150}
                 fill="#8884d8"
                 dataKey="amount" // Change dataKey to "amount"
               >
                 {dataForPieChart.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
                 ))}
               </Pie>
-              <Tooltip formatter={(value, name) => ['$' + value, name]} />
+              <Tooltip formatter={(value, name) => ["$" + value, name]} />
               <Legend />
             </PieChart>
           </div>
         )}
-
       </div>
       <div className="category-sidebar">
         <button
@@ -182,7 +186,7 @@ function TransactionList() {
           </button>
         ))}
         <button className="show-chart-button" onClick={handleShowChart}>
-          {showChart ? 'Hide' : 'Show'} Pie Chart
+          {showChart ? "Hide" : "Show"} Pie Chart
         </button>
       </div>
     </div>
