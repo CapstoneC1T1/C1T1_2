@@ -1,27 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../styles/TransactionList.css";
 import TransactionItem from "./TransactionItem";
-
-/**
-// placeholder transactions
-const transactions = [
-  { id: 1, name: "Amazon", date: "01/23/2024", time: "10:23", amount: 20 },
-  { id: 2, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-  { id: 3, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-  { id: 4, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-  { id: 5, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-  { id: 6, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-  { id: 7, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-  { id: 8, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-  { id: 9, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-];
-//let transactions = [];
-//console.log(transactions);
-**/
+import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'; 
 
 function TransactionList() {
   const [categories, setCategories] = useState([]);
   const [transactions, setTransactions] = useState([]);
+  const [showChart, setShowChart] = useState(false);
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const filteredTransactions =
@@ -35,6 +21,21 @@ function TransactionList() {
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
     console.log("Selected Category:", category);
+  };
+
+  const calculateCategoryTotals = (transactions) => {
+    const totals = transactions.reduce((acc, transaction) => {
+      const amount = parseFloat(transaction.amount);
+      const category = transaction.category;
+      acc[category] = (acc[category] || 0) + amount;
+      return acc;
+    }, {});
+
+    return totals;
+  };
+
+  const calculateTotalSpending = (totals) => {
+    return Object.values(totals).reduce((acc, amount) => acc + amount, 0);
   };
 
   useEffect(() => {
@@ -112,6 +113,23 @@ function TransactionList() {
     }
   };
 
+  const dataForPieChart = React.useMemo(() => {
+    const categoryTotals = calculateCategoryTotals(transactions);
+    const totalSpending = calculateTotalSpending(categoryTotals);
+  
+    return Object.entries(categoryTotals).map(([name, amount]) => ({
+      name,
+      amount, 
+      percentage: ((amount / totalSpending) * 100).toFixed(2),
+    }));
+  }, [transactions]);
+
+  const handleShowChart = () => {
+    setShowChart(!showChart);
+  };
+
+  // console.log(dataForPieChart); 
+
   return (
     <div className="transaction-page">
       <div className="transaction-list">
@@ -123,6 +141,29 @@ function TransactionList() {
             addCategory={addCategory}
           />
         ))}
+        {showChart && dataForPieChart.length > 0 && ( 
+          <div style={{ position: 'relative', width: '100%', height: '400px' }}>
+            <PieChart width={800} height={400}>
+              <Pie
+                data={dataForPieChart}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={({ name, amount, percentage }) => `${name}: $${amount} (${percentage}%)`}
+                outerRadius={150}
+                fill="#8884d8"
+                dataKey="amount" // Change dataKey to "amount"
+              >
+                {dataForPieChart.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value, name) => ['$' + value, name]} />
+              <Legend />
+            </PieChart>
+          </div>
+        )}
+
       </div>
       <div className="category-sidebar">
         <button
@@ -140,6 +181,9 @@ function TransactionList() {
             {category}
           </button>
         ))}
+        <button className="show-chart-button" onClick={handleShowChart}>
+          {showChart ? 'Hide' : 'Show'} Pie Chart
+        </button>
       </div>
     </div>
   );
