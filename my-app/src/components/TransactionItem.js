@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component } from "react";
 import "../styles/TransactionItem.css";
 import { Modal, Button, Form } from "react-bootstrap";
 
@@ -158,9 +158,12 @@ function TransactionItem({ transaction, categories, addCategory }) {
       </div>
       {isExpanded && (
         <div
-          className="transaction-details"
-          onClick={(e) => e.stopPropagation()}
+        className="transaction-details"
+        onClick={(e) => e.stopPropagation()}
         >
+          <div style={{flexBasis:"80%", paddingLeft:".5rem", fontSize:"1.2rem"}}>
+            <p>Current Category: {transaction.category}</p>
+          </div>
           <div className="transaction-category">
             <label htmlFor="category">Category:</label>
             <select
