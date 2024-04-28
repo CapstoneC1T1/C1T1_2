@@ -35,6 +35,9 @@ app.use("/api/v1/data", get_data.get_tran_data);
 app.use("/api/v1/note", modify_fields.modify_note);
 app.use("/api/v1/category_list", save_category.get_category_list);
 app.use("/api/v1/save_category", modify_fields.modify_category);
+app.use("/api/v1/amount", get_data.add_amount);
+app.use("/api/v1/get_amount", get_data.get_amount);
+app.use("/api/v1/sub_amount", get_data.sub_amount);
 /**
 app.use("/api/v1/transactions", (req, res) => {
 console.log("body: " + JSON.stringify(req.body));

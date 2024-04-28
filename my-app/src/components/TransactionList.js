@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import "../styles/TransactionList.css";
 import TransactionItem from "./TransactionItem";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
@@ -42,7 +42,7 @@ function TransactionList() {
   useEffect(() => {
     fetch_cat_list();
     fetch_tran_list();
-  }, []);
+  }, [selectedCategory]);
 
   const fetch_tran_list = async () => {
     fetch(`http://localhost:8000/api/v1/list`)
@@ -148,14 +148,14 @@ function TransactionList() {
           contentLabel="Transaction Pie Chart"
           style={{
             content: {
-              top: '50%',
-              left: '50%',
-              right: 'auto',
-              bottom: 'auto',
-              transform: 'translate(-50%, -50%)',
-              width: '65%',
-              fontFamily: '"Calibri", sans-serif'
-            }     
+              top: "50%",
+              left: "50%",
+              right: "auto",
+              bottom: "auto",
+              transform: "translate(-50%, -50%)",
+              width: "65%",
+              fontFamily: '"Calibri", sans-serif',
+            },
           }}
         >
           <PieChart width={800} height={400}>
@@ -172,7 +172,10 @@ function TransactionList() {
               dataKey="amount"
             >
               {dataForPieChart.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
               ))}
             </Pie>
             <Tooltip formatter={(value, name) => ["$" + value, name]} />

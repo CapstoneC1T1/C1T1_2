@@ -26,12 +26,28 @@ function AddTransaction() {
     setShowModal(true);
   };
 
+  useEffect(() => {
+    fetch_amount_data();
+  }, [total]);
+
+  const fetch_amount_data = async () => {
+    fetch(`http://localhost:8000/api/v1/get_amount`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("failed to get total valu data.");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setTotal(data);
+      })
+      .catch((error) => {
+        console.error("failed to get the amount: ", error);
+      });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Decreases the value of total and saves it when making a transaction
-    setTotal(total - parseInt(amountValue.current.value));
-    sessionStorage.setItem("total", total);
 
     // Process the input values
     const newTransaction = {
@@ -41,6 +57,31 @@ function AddTransaction() {
     const updatedTransactions = [...allTransactions, newTransaction];
     sessionStorage.setItem("transactions", JSON.stringify(updatedTransactions));
     setAllTransactions(updatedTransactions); // Update the state with the updated transactions array
+
+    //decrease the amount added by the transaction
+    const amount_data = JSON.stringify({
+      amount: parseInt(amountValue.current.value),
+    });
+    fetch(`http://localhost:8000/api/v1/sub_amount`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: amount_data,
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch data.");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setTotal(data);
+        sessionStorage.setItem("total", total);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch amount data.", error);
+      });
 
     // Reset the form and hide it
     setShowModal(false);

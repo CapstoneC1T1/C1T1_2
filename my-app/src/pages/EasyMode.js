@@ -33,7 +33,7 @@ function EasyMode() {
   };
 
   // Set this amount to the total the bank account has
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState();
   const amount = useRef();
 
   function handleClick() {
@@ -43,31 +43,50 @@ function EasyMode() {
   function handleDeposit() {
     setTotal(total + parseInt(amount.current.value));
     setShowModal(false);
+    const amount_data = JSON.stringify({
+      amount: parseInt(amount.current.value),
+    });
+    fetch(`http://localhost:8000/api/v1/amount`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: amount_data,
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch data.");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setTotal(data);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch amount data.", error);
+      });
   }
 
-  // TODO: TOTAL INITIALIZATION // Set the total of the bank account that's stored in the DB
   useEffect(() => {
-    // TODO: Change to retrieve the value to a fetch from the DB that contains the amount of money a customer has
     fetch_tran_list();
-    sessionStorage.setItem("total", JSON.stringify(5000));
-    // Temp value, optimally will retrieve value from DB
-    setTotal(5000);
-  }, []);
+    fetch_amount_data();
+  }, [total]);
 
-  /**
-  const transactions = [
-    { id: 1, name: "Amazon", date: "01/23/2024", time: "10:23", amount: 20 },
-    { id: 2, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-    { id: 3, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-    { id: 4, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-    { id: 5, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-    { id: 6, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-    { id: 7, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-    { id: 8, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-    { id: 9, name: "Netflix", date: "01/29", time: "8:03pm", amount: 1 },
-  ];
-  **/
-
+  const fetch_amount_data = async () => {
+    fetch(`http://localhost:8000/api/v1/get_amount`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("failed to get total valu data.");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setTotal(data);
+      })
+      .catch((error) => {
+        console.error("failed to get the amount: ", error);
+      });
+  };
   const fetch_tran_list = async () => {
     fetch(`http://localhost:8000/api/v1/list`)
       .then((res) => {

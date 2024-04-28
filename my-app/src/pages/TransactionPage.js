@@ -14,6 +14,25 @@ function TransactionPage() {
   const [total, setTotal] = useState(
     JSON.parse(sessionStorage.getItem("total")) || 0,
   );
+  useEffect(() => {
+    fetch_amount_data();
+  }, [total]);
+
+  const fetch_amount_data = async () => {
+    fetch(`http://localhost:8000/api/v1/get_amount`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("failed to get total valu data.");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setTotal(data);
+      })
+      .catch((error) => {
+        console.error("failed to get the amount: ", error);
+      });
+  };
 
   return (
     <>

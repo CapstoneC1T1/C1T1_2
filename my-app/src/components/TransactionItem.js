@@ -35,7 +35,7 @@ function TransactionItem({ transaction, categories, addCategory }) {
       })
       .catch((error) => console.log("Error in Item file:", error));
     console.log(selectedCategory);
-  }, [transaction.id]);
+  }, [transaction.id, selectedCategory, transaction.category]);
 
   const handleSummaryClick = (event) => {
     event.stopPropagation(); // revent click from bubbling to expanded details
@@ -158,10 +158,16 @@ function TransactionItem({ transaction, categories, addCategory }) {
       </div>
       {isExpanded && (
         <div
-        className="transaction-details"
-        onClick={(e) => e.stopPropagation()}
+          className="transaction-details"
+          onClick={(e) => e.stopPropagation()}
         >
-          <div style={{flexBasis:"80%", paddingLeft:".5rem", fontSize:"1.2rem"}}>
+          <div
+            style={{
+              flexBasis: "80%",
+              paddingLeft: ".5rem",
+              fontSize: "1.2rem",
+            }}
+          >
             <p>Current Category: {transaction.category}</p>
           </div>
           <div className="transaction-category">
