@@ -17,7 +17,7 @@ Navigate to the express-api directory
 Run `npm install`
 Run `npm run dev`
 Navigate to the my-app directory
-Run `npm install`
+Run `npm install` (if necessary, you also need to run `npm install react-modal` and `npm install recharts`)
 Run `npm start`
 
 **Note**: To setup and run everything locally. You would need to create your own mongodb database as well, and also pass the username and password into express-api/index.js.
