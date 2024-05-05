@@ -20,7 +20,17 @@ https://github.com/CapstoneC1T1/C1T1_2
 
 ### Overview of how the code works
 
-By running the commands from the setup steps, it will run the NextJS server on localhost port 3000. The frontend is responsible for displaying all functionalities. In order to store and retrieve data, the frontend communicates with our backend server. This backend server is connected to our database which is able to store all of the necessary information for our banking application. 
+By running the commands from the setup steps, it will run the NextJS server on localhost port 3000. The frontend is responsible for displaying all functionalities. In order to store and retrieve data, the frontend communicates with our backend server. This backend server is connected to our database via MongoDB, which is able to store all of the necessary information for our banking application.
+
+From there, users are able to deposit money and insert transactions. The home page (easy mode page) also displays the money the account has, along with the recent transactions that were made, that are all linked to a database. 
+
+The transaction page can be routed to either by the navigation bar or by clicking the Checking Account icon on the home page. 
+
+The transaction page contains all of the transactions that are stored in the database. Users can click on each individual transaction to set a category, add a new category, and to save the category. Users can also leave notes about their transactions. Each transaction displays its title, its purchase date, and the amount of the transaction. 
+
+The transaction page also contains a category filter feature on the side, that allows users to seamlessly filter the transactions based on their categories. 
+
+The final feature on the transaction page consists of a pie chart that displays the amount spent in each category.
 
 ### What works
 
